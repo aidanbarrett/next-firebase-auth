@@ -10,7 +10,13 @@ export default function initFirebaseClientSDK() {
         'If not initializing the Firebase JS SDK elsewhere, you must provide "firebaseClientInitConfig" to next-firebase-auth.'
       )
     }
-    initializeApp(firebaseClientInitConfig)
+    const { tenantId, ...firebaseConfig } = firebaseClientInitConfig
+    initializeApp(firebaseConfig)
+
+    if (tenantId) {
+      const firebaseAuth = getAuth();
+      firebaseAuth.tenantId = tenantId
+    }
   }
   // If the user has provided the firebaseAuthEmulatorHost address, set the emulator
   if (firebaseAuthEmulatorHost) {
