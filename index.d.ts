@@ -27,6 +27,7 @@ export interface AuthUser {
   id: string | null
   email: string | null
   emailVerified: boolean
+  tenantId: string | null
   phoneNumber: string | null
   displayName: string | null
   photoURL: string | null
@@ -98,6 +99,7 @@ interface InitConfig {
     messagingSenderId?: string
     // "G-MEASUREMENT_ID"
     measurementId?: string
+    tenantId?: string
   }
   cookies: Cookies.Option &
     Cookies.SetOption & {
