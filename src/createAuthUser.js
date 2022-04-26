@@ -90,6 +90,7 @@ const createAuthUser = ({
   let userId = null
   let email = null
   let emailVerified = false
+  let tenantId = null
   let phoneNumber = null
   let displayName = null
   let photoURL = null
@@ -117,7 +118,7 @@ const createAuthUser = ({
     phoneNumber = firebaseUserClientSDK.phoneNumber
     displayName = firebaseUserClientSDK.displayName
     photoURL = firebaseUserClientSDK.photoURL
-
+    tenantId = firebaseUserClientSDK.tenantId
     /**
      * Returns a JSON Web Token (JWT) used to identify the user to a Firebase
      * service.
@@ -149,6 +150,7 @@ const createAuthUser = ({
     photoURL = firebaseUserAdminSDK.picture
     getIdTokenFunc = async () => token
     tokenString = token
+    tenantId = firebaseUserAdminSDK.firebase.tenant
   } else if (serializedAuthUser) {
     const deserializedUser = JSON.parse(serializedAuthUser)
     customClaims = deserializedUser.claims
@@ -158,6 +160,7 @@ const createAuthUser = ({
     phoneNumber = deserializedUser.phoneNumber
     displayName = deserializedUser.displayName
     photoURL = deserializedUser.photoURL
+    tenantId = deserializedUser.tenantId
     getIdTokenFunc = async () => deserializedUser._token || null
     tokenString = deserializedUser._token
   }
@@ -165,6 +168,7 @@ const createAuthUser = ({
     id: userId,
     email,
     emailVerified,
+    tenantId,
     phoneNumber,
     displayName,
     photoURL,

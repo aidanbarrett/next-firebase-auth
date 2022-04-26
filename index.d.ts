@@ -22,6 +22,7 @@ export interface AuthUser {
   id: string | null
   email: string | null
   emailVerified: boolean
+  tenantId: string | null
   phoneNumber: string | null
   displayName: string | null
   photoURL: string | null

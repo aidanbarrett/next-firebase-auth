@@ -22,6 +22,7 @@ describe('createAuthUser: basic tests', () => {
       email: null,
       emailVerified: false,
       phoneNumber: null,
+      tenantId: null,
       displayName: null,
       photoURL: null,
       getIdToken: expect.any(Function),

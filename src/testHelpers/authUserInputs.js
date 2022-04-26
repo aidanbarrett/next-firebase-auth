@@ -1,4 +1,4 @@
-export const createMockFirebaseUserClientSDK = () => ({
+export const createMockFirebaseUserClientSDK = ({ tenant } = {}) => ({
   uid: 'abc-123',
   email: 'abc@example.com',
   emailVerified: true,
@@ -7,11 +7,14 @@ export const createMockFirebaseUserClientSDK = () => ({
   photoURL: 'https://abc.googleusercontent.com/cdf/profile_photo.png',
   getIdToken: async () => 'my-id-token-abc-123',
   claims: {},
+  firebase: {
+    tenant,
+  },
   // ... other properties
 })
 
 // https://firebase.google.com/docs/reference/admin/node/firebase-admin.auth.decodedidtoken
-export const createMockFirebaseUserAdminSDK = () => ({
+export const createMockFirebaseUserAdminSDK = ({ tenant } = {}) => ({
   uid: 'def-456',
   email: 'def@example.com',
   email_verified: true,
@@ -25,7 +28,9 @@ export const createMockFirebaseUserAdminSDK = () => ({
   sub: 'def-456',
   iat: 1540000000,
   exp: 1540000000,
-  firebase: {},
+  firebase: {
+    tenant,
+  },
   // ... other properties
 })
 
@@ -50,5 +55,5 @@ export const createMockSerializedAuthUser = ({ claims = {} } = {}) =>
     displayName: 'Ghi Jkl',
     photoURL: 'https://ghi.googleusercontent.com/jkl/profile_photo.png',
     clientInitialized: false,
-    _token: 'my-id-token-ghi-789',
+    _token: 'my-id-token-ghi-789'
   })
