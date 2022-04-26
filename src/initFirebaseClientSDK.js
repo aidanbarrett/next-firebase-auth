@@ -14,7 +14,7 @@ export default function initFirebaseClientSDK() {
     initializeApp(firebaseConfig)
 
     if (tenantId) {
-      const firebaseAuth = getAuth();
+      const firebaseAuth = getAuth()
       firebaseAuth.tenantId = tenantId
     }
   }

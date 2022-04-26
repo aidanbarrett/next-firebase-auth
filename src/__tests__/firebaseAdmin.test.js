@@ -603,18 +603,18 @@ describe('getCustomIdAndRefreshTokens', () => {
     const admin = getFirebaseAdminApp()
     admin.auth().verifyIdToken.mockResolvedValue(mockFirebaseUser)
     admin
-        .auth()
-        .tenantManager()
-        .authForTenant(mockTenant)
-        .createCustomToken.mockResolvedValue('my-custom-token')
+      .auth()
+      .tenantManager()
+      .authForTenant(mockTenant)
+      .createCustomToken.mockResolvedValue('my-custom-token')
 
     await getCustomIdAndRefreshTokens('some-token')
     expect(admin.auth().createCustomToken).toHaveBeenCalledWith(
-        mockFirebaseUser.uid
+      mockFirebaseUser.uid
     )
 
     expect(admin.auth().tenantManager().authForTenant).toHaveBeenCalledWith(
-        mockTenant
+      mockTenant
     )
   })
 
