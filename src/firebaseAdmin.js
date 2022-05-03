@@ -154,7 +154,7 @@ export const verifyIdToken = async (token, refreshToken = null) => {
 export const getCustomIdAndRefreshTokens = async (token) => {
   const AuthUser = await verifyIdToken(token)
   const auth = getAuth(AuthUser)
-
+  const tenantId = auth.tenantId;
   // It's important that we pass the same user ID here, otherwise
   // Firebase will create a new user.
   const customToken = await auth.createCustomToken(AuthUser.id)
@@ -172,6 +172,7 @@ export const getCustomIdAndRefreshTokens = async (token) => {
     body: JSON.stringify({
       token: customToken,
       returnSecureToken: true,
+      ...(tenantId) && {tenantId}
     }),
   })
   const refreshTokenJSON = await refreshTokenResponse.json()
